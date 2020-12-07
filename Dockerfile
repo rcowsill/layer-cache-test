@@ -1,4 +1,4 @@
-FROM alpine:3.10 AS list
+FROM alpine:3.10
 CMD ls -l /
 
 FROM alpine:3.10

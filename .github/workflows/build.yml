@@ -1,25 +1,19 @@
-name: Build
 on: [push]
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-
     steps:
-      - name: Checkout https://github.com/${{ github.repository }} @ ${{ github.ref }}
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+      - uses: actions/checkout@v2
 
-      - uses: satackey/action-docker-layer-caching@v0.0.8
+      - uses: satackey/action-docker-layer-caching@v0.0.10
         with:
           concurrency: 1
-          key: docker-cache-v2-{hash}
+          key: docker-cache-v3-{hash}
           restore-keys: |
-            docker-cache-v2-
+            docker-cache-v3-
 
-      - run: docker build .
+      - run: |
+          docker build .
+          sleep 90s
