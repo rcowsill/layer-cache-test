@@ -1,0 +1,25 @@
+name: Build
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout https://github.com/${{ github.repository }} @ ${{ github.ref }}
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - uses: satackey/action-docker-layer-caching@v0.0.10
+        with:
+          concurrency: 1
+          key: docker-cache-v1-{hash}
+          restore-keys: |
+            docker-cache-v1-
+
+      - run: docker build .
