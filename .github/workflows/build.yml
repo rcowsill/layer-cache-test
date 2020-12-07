@@ -15,11 +15,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: satackey/action-docker-layer-caching@v0.0.10
+      - uses: satackey/action-docker-layer-caching@v0.0.8
         with:
           concurrency: 1
-          key: docker-cache-v1-{hash}
+          key: docker-cache-v2-{hash}
           restore-keys: |
-            docker-cache-v1-
+            docker-cache-v2-
 
       - run: docker build .
