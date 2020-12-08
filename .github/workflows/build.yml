@@ -7,12 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: rcowsill/action-docker-layer-caching@fix/85-release
+      - uses: rcowsill/action-docker-layer-caching@test/fix-75-release
         with:
           concurrency: 1
-          key: docker-cache-v5-{hash}
+          key: docker-cache-v6-{hash}
           restore-keys: |
-            docker-cache-v5-
+            docker-cache-v6-
 
       - run: |
           docker build .
